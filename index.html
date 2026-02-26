@@ -41,6 +41,28 @@ a{text-decoration:none;color:inherit}
 .nav-cta{background:var(--primary);color:#fff;padding:10px 26px;border-radius:8px;font-size:.88rem;font-weight:700;transition:all .3s;border:none;cursor:pointer;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
 .nav-cta:hover{background:var(--primary-dark);transform:translateY(-2px);box-shadow:0 8px 20px rgba(22,163,74,.3)}
 
+/* ═══ MOBILE NAV TABS ═══════════════════════════════ */
+.mobile-tabs{
+  display:none;
+  position:fixed;top:68px;left:0;right:0;z-index:199;
+  background:rgba(255,255,255,.97);backdrop-filter:blur(10px);
+  border-bottom:2px solid rgba(22,163,74,.15);
+  overflow-x:auto;white-space:nowrap;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+  box-shadow:0 2px 10px rgba(0,0,0,.07);
+}
+.mobile-tabs::-webkit-scrollbar{display:none}
+.mobile-tabs-inner{display:inline-flex;gap:0;padding:0 8px}
+.mobile-tab{
+  display:inline-flex;align-items:center;padding:10px 14px;
+  font-size:.82rem;font-weight:700;color:var(--gray);
+  text-decoration:none;white-space:nowrap;
+  border-bottom:2px solid transparent;transition:all .2s;
+  position:relative;top:2px;
+}
+.mobile-tab:hover,.mobile-tab.active{color:var(--primary);border-bottom-color:var(--primary)}
+
 /* ═══ HERO ═══════════════════════════════════════════════ */
 .hero{
   min-height:100vh;display:flex;align-items:flex-start;position:relative;overflow:hidden;
@@ -254,7 +276,8 @@ a{text-decoration:none;color:inherit}
 @media(max-width:640px){
   .nav-links{display:none}
   .nav-cta{display:none}
-  .hero{padding:72px 0 40px;min-height:auto}
+  .mobile-tabs{display:block}
+  .hero{padding:110px 0 40px;min-height:auto}
   .hero-brand-text .line1,.hero-brand-text .line2{font-size:2.2rem}
   .services-grid{grid-template-columns:1fr}
   .portfolio-grid{grid-template-columns:1fr}
@@ -319,7 +342,16 @@ a{text-decoration:none;color:inherit}
   </div>
 </nav>
 
-<!-- HERO -->
+<!-- MOBILE NAV TABS -->
+<div class="mobile-tabs" id="mobileTabs">
+  <div class="mobile-tabs-inner">
+    <a href="#services" class="mobile-tab">🚚 Услуги</a>
+    <a href="#portfolio" class="mobile-tab">📷 Фото</a>
+    <a href="#process" class="mobile-tab">⚙️ Как работаем</a>
+    <a href="#pricing" class="mobile-tab">💰 Цены</a>
+    <a href="#contact" class="mobile-tab">📍 Контакты</a>
+  </div>
+</div>
 <section class="hero">
   <div class="hero-overlay"></div>
   <div class="container">
@@ -757,6 +789,28 @@ a{text-decoration:none;color:inherit}
 window.addEventListener('scroll', () => {
   document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 60);
 });
+
+// ── Активный таб мобильной навигации ─────────────────────
+(function(){
+  const tabs = document.querySelectorAll('.mobile-tab');
+  const ids  = ['services','portfolio','process','pricing','contact'];
+  function setActive(){
+    let cur = '';
+    ids.forEach(id => {
+      const el = document.getElementById(id);
+      if(el && window.scrollY >= el.offsetTop - 140) cur = id;
+    });
+    tabs.forEach(t => {
+      const href = t.getAttribute('href').replace('#','');
+      t.classList.toggle('active', href === cur);
+    });
+  }
+  window.addEventListener('scroll', setActive, {passive:true});
+  // плавный скролл + подвигаем таб в видимую область
+  tabs.forEach(t => t.addEventListener('click', function(){
+    setTimeout(() => { this.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'}); }, 300);
+  }));
+})();
 
 // ── Модал ────────────────────────────────────────────────
 function openModal() {
