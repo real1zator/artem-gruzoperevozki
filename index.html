@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Грузоперевозки в Калининграде — Артём | FIAT Ducato до 3 т</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sora:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --primary:#16a34a;--primary-dark:#15803d;--primary-light:#dcfce7;
+  --accent:#f59e0b;--dark:#111827;--gray:#6b7280;--light:#f9fafb;
+  --white:#fff;--radius:14px;--shadow:0 4px 20px rgba(22,163,74,.12);
+  --font-main:'Plus Jakarta Sans',sans-serif;--font-accent:'Sora',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-main);color:var(--dark);line-height:1.7;overflow-x:hidden;background:var(--white);padding-bottom:80px}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+/* ═══ TOPBAR ══════════════════════════════════════════════ */
+.topbar{background:linear-gradient(90deg,#0f2d1a,#1a4a2a);color:rgba(255,255,255,.85);padding:10px 0;font-size:.83rem}
+.topbar .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.topbar-left{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.topbar-item{display:inline-flex;align-items:center;gap:7px}
+.topbar-item svg{opacity:.7}
+.topbar-avito{display:inline-flex;align-items:center;gap:6px;background:rgba(58,177,98,.25);border:1px solid rgba(74,222,128,.35);padding:4px 14px;border-radius:50px;font-weight:700;color:#86efac;transition:.2s}
+.topbar-avito:hover{background:rgba(58,177,98,.4);color:#fff}
+
+/* ═══ NAV ════════════════════════════════════════════════ */
+.nav{position:fixed;top:0;left:0;width:100%;z-index:200;background:rgba(255,255,255,.97);backdrop-filter:blur(14px);border-bottom:1px solid rgba(22,163,74,.1);transition:box-shadow .3s}
+.nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.1)}
+.nav .container{display:flex;align-items:center;justify-content:space-between;padding-top:10px;padding-bottom:10px}
+.nav-logo{display:flex;align-items:center;text-decoration:none;gap:10px}
+.nav-logo img{height:48px;width:48px;object-fit:cover;border-radius:50%;border:2px solid var(--primary)}
+.nav-links{display:flex;gap:26px;list-style:none}
+.nav-links a{font-size:.88rem;font-weight:600;color:var(--gray);transition:color .2s}
+.nav-links a:hover{color:var(--primary)}
+.nav-cta{background:var(--primary);color:#fff;padding:10px 26px;border-radius:8px;font-size:.88rem;font-weight:700;transition:all .3s;border:none;cursor:pointer;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.nav-cta:hover{background:var(--primary-dark);transform:translateY(-2px);box-shadow:0 8px 20px rgba(22,163,74,.3)}
+
+/* ═══ HERO ═══════════════════════════════════════════════ */
+.hero{
+  min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;
+  padding:120px 0 80px;color:#fff;
+  background-color:#0d1f12;
+  background-image:url(hero_bg.webp);background-size:cover;background-position:center;
+}
+.hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(5,20,10,.90) 0%,rgba(10,30,15,.78) 60%,rgba(5,15,8,.68) 100%);
+}
+.hero .container{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.hero-brand{display:flex;align-items:center;gap:0;margin-bottom:32px}
+.hero-brand-logo{width:80px;height:80px;border-radius:50%;overflow:hidden;flex-shrink:0;border:3px solid rgba(74,222,128,.4);box-shadow:0 4px 24px rgba(74,222,128,.3)}
+.hero-brand-logo img{width:100%;height:100%;object-fit:cover}
+.hero-brand-text{margin-left:18px}
+.hero-brand-text .line1{font-family:var(--font-accent);font-size:clamp(2.2rem,4.5vw,3.6rem);font-weight:900;color:#fff;line-height:1;letter-spacing:.05em;text-shadow:0 2px 20px rgba(0,0,0,.4)}
+.hero-brand-text .line2{font-family:var(--font-accent);font-size:clamp(2.2rem,4.5vw,3.6rem);font-weight:900;color:#4ade80;line-height:1;letter-spacing:.05em;text-shadow:0 0 30px rgba(74,222,128,.5),0 2px 20px rgba(0,0,0,.4)}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(22,163,74,.2);border:1px solid rgba(74,222,128,.35);padding:7px 18px;border-radius:50px;font-size:.78rem;font-weight:700;color:#86efac;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:20px}
+.hero-subtitle{font-size:1.1rem;color:rgba(255,255,255,.75);margin-bottom:36px;max-width:480px;line-height:1.7}
+.hero-buttons{display:flex;gap:14px;flex-wrap:wrap}
+.btn-hero-primary{display:inline-flex;align-items:center;gap:10px;background:var(--primary);color:#fff;padding:15px 34px;border-radius:9px;font-size:.98rem;font-weight:700;transition:all .3s;border:none;cursor:pointer}
+.btn-hero-primary:hover{background:#15803d;transform:translateY(-3px);box-shadow:0 14px 30px rgba(22,163,74,.4)}
+.btn-hero-outline{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.08);color:#fff;padding:15px 34px;border-radius:9px;font-size:.98rem;font-weight:600;border:2px solid rgba(255,255,255,.25);transition:all .3s;cursor:pointer;backdrop-filter:blur(4px)}
+.btn-hero-outline:hover{border-color:#4ade80;color:#4ade80}
+.hero-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.hero-stat{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);padding:24px 20px;text-align:center;backdrop-filter:blur(6px);transition:.3s}
+.hero-stat:hover{background:rgba(22,163,74,.12);border-color:rgba(74,222,128,.3)}
+.hero-stat-num{font-family:var(--font-accent);font-size:2rem;font-weight:900;color:#4ade80;margin-bottom:4px}
+.hero-stat-label{font-size:.8rem;color:rgba(255,255,255,.55)}
+
+/* ═══ VEHICLE STRIP ═════════════════════════════════════ */
+.vehicle-strip{background:linear-gradient(90deg,#0d2b17,#1a4a2a);padding:18px 0;border-bottom:1px solid rgba(74,222,128,.15)}
+.vehicle-strip .container{display:flex;justify-content:center;flex-wrap:wrap;gap:24px}
+.vs-item{display:flex;align-items:center;gap:8px;color:rgba(255,255,255,.85);font-size:.88rem;font-weight:600}
+.vs-item svg{color:#4ade80;flex-shrink:0}
+.vs-sep{color:rgba(255,255,255,.2);font-size:1.2rem}
+
+/* ═══ SECTION COMMONS ════════════════════════════════════ */
+.section-heading{text-align:center;margin-bottom:64px}
+.section-tag{display:inline-block;font-size:.75rem;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:3px;margin-bottom:12px}
+.section-title{font-family:var(--font-accent);font-size:2.6rem;color:var(--dark);margin-bottom:16px}
+.section-desc{font-size:1.05rem;color:var(--gray);max-width:560px;margin:0 auto}
+
+/* ═══ SERVICES ════════════════════════════════════════════ */
+.services{padding:100px 0;background:var(--white)}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.svc-card{background:var(--light);border-radius:var(--radius);border:1px solid transparent;transition:all .4s;overflow:hidden;display:flex;flex-direction:column}
+.svc-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--primary),var(--accent));transform:scaleX(0);transition:transform .4s;transform-origin:left}
+.svc-card{position:relative}
+.svc-card:hover{transform:translateY(-8px);box-shadow:0 20px 52px rgba(22,163,74,.14);background:#fff;border-color:rgba(22,163,74,.12)}
+.svc-card:hover::before{transform:scaleX(1)}
+.svc-photo{width:100%;height:200px;object-fit:cover;display:block;flex-shrink:0}
+.svc-body{padding:28px;display:flex;flex-direction:column;flex:1}
+.svc-icon{width:54px;height:54px;border-radius:13px;background:var(--primary-light);display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+.svc-icon svg{width:24px;height:24px;color:var(--primary)}
+.svc-card h3{font-size:1.15rem;font-weight:700;margin-bottom:10px}
+.svc-card p{font-size:.88rem;color:var(--gray);line-height:1.75;flex:1}
+.svc-price{display:inline-block;margin-top:16px;font-size:.88rem;font-weight:800;color:var(--primary);background:var(--primary-light);padding:6px 16px;border-radius:7px}
+
+/* ═══ PORTFOLIO ══════════════════════════════════════════ */
+.portfolio{padding:100px 0;background:var(--light)}
+.portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.portfolio-item{position:relative;border-radius:var(--radius);overflow:hidden;height:280px;cursor:pointer}
+.portfolio-item img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.portfolio-item:hover img{transform:scale(1.1)}
+.portfolio-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,25,15,.88) 0%,transparent 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:22px;opacity:0;transition:.3s}
+.portfolio-item:hover .portfolio-overlay{opacity:1}
+.portfolio-overlay h4{font-size:1rem;font-weight:700;color:#fff;margin-bottom:3px}
+.portfolio-overlay span{font-size:.82rem;color:rgba(255,255,255,.65)}
+
+/* ═══ PROCESS ════════════════════════════════════════════ */
+.process{padding:100px 0;background:var(--white)}
+.process .container{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.process-image img{border-radius:var(--radius);width:100%;height:480px;object-fit:cover;box-shadow:0 24px 56px rgba(0,0,0,.12)}
+.process-steps{display:flex;flex-direction:column;gap:20px}
+.p-step{display:flex;gap:18px;padding:22px;border-radius:var(--radius);border:1px solid rgba(22,163,74,.08);transition:.3s}
+.p-step:hover{background:var(--primary-light);border-color:rgba(22,163,74,.2)}
+.p-step-num{width:50px;height:50px;border-radius:12px;background:var(--primary-light);display:flex;align-items:center;justify-content:center;font-family:var(--font-accent);font-size:1.15rem;font-weight:800;color:var(--primary);flex-shrink:0}
+.p-step h4{font-size:1rem;font-weight:700;margin-bottom:5px}
+.p-step p{font-size:.88rem;color:var(--gray)}
+
+/* ═══ CALCULATOR ══════════════════════════════════════════ */
+.calculator{padding:100px 0;background:linear-gradient(135deg,#0f4620 0%,var(--primary) 50%,#0f7a32 100%);color:#fff;text-align:center}
+.calculator h2{font-family:var(--font-accent);font-size:2.6rem;margin-bottom:14px}
+.calculator>p,.calculator .container>p{font-size:1.05rem;color:rgba(255,255,255,.7);margin-bottom:48px}
+.calc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;max-width:900px;margin:0 auto}
+.calc-card{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:var(--radius);padding:36px 22px;transition:.3s}
+.calc-card:hover{background:rgba(255,255,255,.16);transform:translateY(-6px)}
+.calc-card h3{font-size:1.05rem;font-weight:700;margin-bottom:8px}
+.calc-card .price{font-family:var(--font-accent);font-size:2.4rem;font-weight:800;color:#fbbf24;line-height:1;margin-bottom:4px}
+.calc-card .unit{font-size:.82rem;color:rgba(255,255,255,.55);margin-bottom:20px}
+.calc-features{list-style:none;text-align:left;font-size:.85rem;line-height:2.1}
+.calc-features li{color:rgba(255,255,255,.8);display:flex;align-items:center;gap:8px}
+.calc-features li svg{width:13px;height:13px;color:#fbbf24;flex-shrink:0}
+
+/* ═══ TESTIMONIALS ═══════════════════════════════════════ */
+.testimonials{padding:100px 0;background:var(--light)}
+.testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.t-card{background:#fff;border-radius:var(--radius);padding:34px 26px;box-shadow:var(--shadow);transition:.3s}
+.t-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(22,163,74,.15)}
+.t-stars{display:flex;gap:3px;margin-bottom:14px}
+.t-stars svg{width:15px;height:15px;color:var(--accent)}
+.t-card blockquote{font-size:.93rem;color:var(--gray);line-height:1.75;margin-bottom:22px;font-style:italic}
+.t-author{display:flex;align-items:center;gap:13px}
+.t-avatar{width:46px;height:46px;border-radius:50%;background:var(--primary-light);display:flex;align-items:center;justify-content:center;font-size:.95rem;font-weight:700;color:var(--primary);flex-shrink:0}
+.t-name{font-size:.92rem;font-weight:700}
+.t-role{font-size:.78rem;color:var(--gray)}
+
+/* ═══ CONTACT ════════════════════════════════════════════ */
+.contact{padding:100px 0;background:#fff}
+.contact .container{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+.contact-form{background:var(--light);border-radius:var(--radius);padding:44px;box-shadow:var(--shadow)}
+.contact-form h3{font-family:var(--font-accent);font-size:1.75rem;margin-bottom:8px}
+.contact-form>p{font-size:.88rem;color:var(--gray);margin-bottom:28px}
+.form-group{margin-bottom:18px}
+.form-group label{display:block;font-size:.83rem;font-weight:600;margin-bottom:7px}
+.form-group input,.form-group textarea,.form-group select{width:100%;padding:13px 16px;border:2px solid #e5e7eb;border-radius:9px;font-family:var(--font-main);font-size:.93rem;transition:border-color .2s;outline:none;background:#fff}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--primary)}
+.form-group textarea{height:110px;resize:vertical}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-submit{width:100%;padding:15px;background:var(--primary);color:#fff;border:none;border-radius:9px;font-size:.98rem;font-weight:700;cursor:pointer;transition:.3s}
+.form-submit:hover{background:var(--primary-dark);transform:translateY(-2px)}
+.contact-info h3{font-family:var(--font-accent);font-size:1.75rem;margin-bottom:8px}
+.contact-info>p{font-size:.88rem;color:var(--gray);margin-bottom:28px}
+.cd{display:flex;gap:14px;margin-bottom:20px}
+.cd-icon{width:50px;height:50px;border-radius:var(--radius);background:var(--primary-light);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cd-icon svg{width:20px;height:20px;color:var(--primary)}
+.cd h4{font-size:.92rem;font-weight:700;margin-bottom:3px}
+.cd p{font-size:.88rem;color:var(--gray)}
+.contact-schedule{margin-top:36px;padding:24px;border-radius:var(--radius);background:var(--light);box-shadow:var(--shadow)}
+.contact-schedule h4{font-size:.95rem;font-weight:700;margin-bottom:14px}
+.contact-schedule table{width:100%;font-size:.88rem}
+.contact-schedule td{padding:5px 0;color:var(--gray)}
+.contact-schedule td:last-child{text-align:right;font-weight:600;color:var(--dark)}
+
+/* ═══ FOOTER ══════════════════════════════════════════════ */
+.footer{background:#0d1f12;color:rgba(255,255,255,.6);padding:60px 0 28px}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:44px}
+.footer-brand{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.footer-brand img{width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid rgba(74,222,128,.3)}
+.footer p{font-size:.88rem;line-height:1.75;margin-bottom:14px}
+.footer h4{font-size:.92rem;font-weight:700;color:#fff;margin-bottom:14px}
+.footer ul{list-style:none}
+.footer ul li{margin-bottom:9px}
+.footer ul a{font-size:.88rem;color:rgba(255,255,255,.55);transition:color .2s}
+.footer ul a:hover{color:#4ade80}
+.footer-social{display:flex;gap:10px;margin-top:14px}
+.footer-social a{width:38px;height:38px;border-radius:9px;background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;transition:.3s}
+.footer-social a:hover{background:var(--primary);transform:translateY(-3px)}
+.footer-social svg{width:15px;height:15px;color:rgba(255,255,255,.65)}
+.footer-bottom{padding-top:28px;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;font-size:.83rem;flex-wrap:wrap;gap:8px}
+
+/* ═══ STICKY BUTTONS ══════════════════════════════════════ */
+.sticky-btns{
+  position:fixed;bottom:24px;right:24px;z-index:500;
+  display:flex;flex-direction:column;gap:12px;align-items:flex-end;
+}
+.sticky-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 22px;border-radius:50px;font-size:.95rem;font-weight:700;
+  cursor:pointer;border:none;transition:all .3s;
+  box-shadow:0 6px 24px rgba(0,0,0,.25);white-space:nowrap;
+  text-decoration:none;
+}
+.sticky-call{background:#16a34a;color:#fff}
+.sticky-call:hover{background:#15803d;transform:translateY(-3px);box-shadow:0 10px 30px rgba(22,163,74,.45)}
+.sticky-order{background:#f59e0b;color:#fff}
+.sticky-order:hover{background:#d97706;transform:translateY(-3px);box-shadow:0 10px 30px rgba(245,158,11,.4)}
+.sticky-btn svg{width:18px;height:18px;flex-shrink:0}
+
+/* ═══ MODAL ЗАЯВКА ════════════════════════════════════════ */
+.modal-backdrop{
+  display:none;position:fixed;inset:0;z-index:800;
+  background:rgba(0,0,0,.55);backdrop-filter:blur(4px);
+  align-items:center;justify-content:center;
+}
+.modal-backdrop.open{display:flex}
+.modal-box{
+  background:#fff;border-radius:20px;padding:44px;width:100%;max-width:480px;
+  box-shadow:0 24px 64px rgba(0,0,0,.25);position:relative;
+  animation:modalIn .25s ease both;
+}
+@keyframes modalIn{from{opacity:0;transform:scale(.94) translateY(16px)}to{opacity:1;transform:scale(1)}}
+.modal-close{
+  position:absolute;top:16px;right:16px;background:var(--light);
+  border:none;cursor:pointer;width:36px;height:36px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;transition:.2s;
+}
+.modal-close:hover{background:#e5e7eb}
+.modal-close svg{width:16px;height:16px;color:#6b7280}
+.modal-box h3{font-family:var(--font-accent);font-size:1.5rem;margin-bottom:6px}
+.modal-box>p{font-size:.88rem;color:var(--gray);margin-bottom:24px}
+
+/* ═══ RESPONSIVE ══════════════════════════════════════════ */
+@media(max-width:1024px){
+  .hero .container{grid-template-columns:1fr}
+  .hero-stats{display:none}
+  .services-grid{grid-template-columns:repeat(2,1fr)}
+  .portfolio-grid{grid-template-columns:1fr 1fr}
+  .process .container{grid-template-columns:1fr}
+  .calc-grid{grid-template-columns:1fr}
+  .testimonials-grid{grid-template-columns:1fr 1fr}
+  .contact .container{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+  .nav-links{display:none}
+  .hero{padding:100px 0 60px;min-height:auto}
+  .hero-brand-text .line1,.hero-brand-text .line2{font-size:2.2rem}
+  .services-grid{grid-template-columns:1fr}
+  .portfolio-grid{grid-template-columns:1fr}
+  .testimonials-grid{grid-template-columns:1fr}
+  .section-title{font-size:2rem}
+  .calculator h2{font-size:2rem}
+  .form-row{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr}
+  .sticky-btns{bottom:16px;right:16px}
+  .sticky-btn{padding:12px 18px;font-size:.88rem}
+  .vehicle-strip .container{gap:14px}
+  .vs-sep{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-left">
+      <span class="topbar-item">
+        <svg style="width:13px;height:13px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/></svg>
+        Калининград, Советский пр-т, 43
+      </span>
+      <span class="topbar-item">
+        <svg style="width:13px;height:13px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        Пн–Вс 8:00 — 21:00
+      </span>
+      <span class="topbar-item">
+        🚚 FIAT Ducato · до 3 т · кузов 4×1.8×1.9 м
+      </span>
+    </div>
+    <a href="https://www.avito.ru/kaliningrad/predlozheniya_uslug/gruzoperevozki_gruzchiki_kvartirnye_pereezdy_2449768645?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJpZ3hSbUJaZTJBN1o5VGR5Ijt9Q3fy6T8AAAA" target="_blank" class="topbar-avito">
+      <svg style="width:12px;height:12px" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+      Мы на Авито
+    </a>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav" id="mainNav">
+  <div class="container">
+    <a href="#" class="nav-logo">
+      <img src="logo.webp" alt="Грузоперевозки Артём">
+      <span style="display:flex;flex-direction:column;line-height:1">
+        <span style="font-family:'Sora',sans-serif;font-size:1.05rem;font-weight:900;color:#111827;letter-spacing:.03em">ГРУЗО</span>
+        <span style="font-family:'Sora',sans-serif;font-size:1.05rem;font-weight:900;color:#16a34a;letter-spacing:.03em">ПЕРЕВОЗКИ</span>
+      </span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services">Услуги</a></li>
+      <li><a href="#portfolio">Фото</a></li>
+      <li><a href="#process">Как работаем</a></li>
+      <li><a href="#pricing">Цены</a></li>
+      <li><a href="#contact">Контакты</a></li>
+    </ul>
+    <a href="https://www.avito.ru/kaliningrad/predlozheniya_uslug/gruzoperevozki_gruzchiki_kvartirnye_pereezdy_2449768645?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJpZ3hSbUJaZTJBN1o5VGR5Ijt9Q3fy6T8AAAA" target="_blank" class="nav-cta">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      Написать на Авито
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-overlay"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-brand">
+        <div class="hero-brand-logo">
+          <img src="logo.webp" alt="Артём — грузоперевозки">
+        </div>
+        <div class="hero-brand-text">
+          <div class="line1">ГРУЗО</div>
+          <div class="line2">ПЕРЕВОЗКИ</div>
+        </div>
+      </div>
+      <div class="hero-tag">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg>
+        Калининград · Артём · 5 лет опыта
+      </div>
+      <p class="hero-subtitle">Квартирные, офисные и дачные переезды. Доставка стройматериалов, вывоз мусора. Своя машина — низкие цены. Время подачи от 20 минут.</p>
+      <div class="hero-buttons">
+        <a href="https://www.avito.ru/kaliningrad/predlozheniya_uslug/gruzoperevozki_gruzchiki_kvartirnye_pereezdy_2449768645?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJpZ3hSbUJaZTJBN1o5VGR5Ijt9Q3fy6T8AAAA" target="_blank" class="btn-hero-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Написать на Авито
+        </a>
+        <button class="btn-hero-outline" onclick="openModal()">
+          Оставить заявку
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-num">5 лет</div><div class="hero-stat-label">Опыт перевозок</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">3 чел.</div><div class="hero-stat-label">Грузчики в команде</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">250 км</div><div class="hero-stat-label">Радиус доставки</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">20 мин</div><div class="hero-stat-label">Время подачи</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- VEHICLE STRIP -->
+<div class="vehicle-strip">
+  <div class="container">
+    <div class="vs-item">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+      FIAT Ducato
+    </div>
+    <span class="vs-sep">·</span>
+    <div class="vs-item">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m7 11 2-2-2-2M11 13h4M2 18a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1z"/></svg>
+      Кузов 4 × 1.8 × 1.9 м
+    </div>
+    <span class="vs-sep">·</span>
+    <div class="vs-item">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      До 3 тонн
+    </div>
+    <span class="vs-sep">·</span>
+    <div class="vs-item">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      Без выходных
+    </div>
+    <span class="vs-sep">·</span>
+    <div class="vs-item">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      ⭐⭐⭐⭐⭐ Авито
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-heading">
+      <div class="section-tag">Услуги</div>
+      <h2 class="section-title">Перевезём всё — быстро и надёжно</h2>
+      <p class="section-desc">Работаем по Калининграду и области. Есть стяжные ремни и поролон для безопасной перевозки мебели</p>
+    </div>
+    <div class="services-grid">
+
+      <!-- 1. Квартирный переезд -->
+      <div class="svc-card">
+        <img src="svc1_photo1.webp" alt="Квартирный переезд" class="svc-photo">
+        <div class="svc-body">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+          <h3>Квартирный переезд</h3>
+          <p>Переезжаем бережно и быстро. Разбираем и собираем мебель, упаковываем вещи, перевозим технику, хрупкие предметы и мебель любого размера. Без царапин и повреждений.</p>
+          <span class="svc-price">от 450 ₽/час</span>
+        </div>
+      </div>
+
+      <!-- 2. Офисный и дачный переезд -->
+      <div class="svc-card">
+        <img src="svc2_photo1.webp" alt="Офисный переезд" class="svc-photo">
+        <div class="svc-body">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+          <h3>Офисный и дачный переезд</h3>
+          <p>Переезд офиса или дачи с минимальными потерями рабочего времени. Упакуем оргтехнику, мебель, документы. Работаем в выходные без доплат. Разгрузим и расставим по местам.</p>
+          <span class="svc-price">от 450 ₽/час</span>
+        </div>
+      </div>
+
+      <!-- 3. Доставка стройматериалов -->
+      <div class="svc-card">
+        <img src="svc3_photo1.webp" alt="Доставка стройматериалов" class="svc-photo">
+        <div class="svc-body">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+          <h3>Доставка стройматериалов</h3>
+          <p>Доставляем мешки, плиты, доски, кирпичи, блоки и другие стройматериалы в любую точку города и области. Кузов жёсткий — груз не намокнет. Грузчики помогут с разгрузкой.</p>
+          <span class="svc-price">от 90 ₽/км</span>
+        </div>
+      </div>
+
+      <!-- 4. Грузчики -->
+      <div class="svc-card">
+        <img src="svc4_photo1.webp" alt="Грузчики" class="svc-photo">
+        <div class="svc-body">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/></svg></div>
+          <h3>Грузчики</h3>
+          <p>В команде 3 опытных, ответственных грузчика. Поднимем на любой этаж, занесём в дверной проём, аккуратно разместим в машине. Работаем быстро и без лишних перерывов.</p>
+          <span class="svc-price">500 ₽/час · 3 чел.</span>
+        </div>
+      </div>
+
+      <!-- 5. Вывоз мусора -->
+      <div class="svc-card">
+        <img src="svc5_photo1.webp" alt="Вывоз мусора" class="svc-photo">
+        <div class="svc-body">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg></div>
+          <h3>Вывоз мусора</h3>
+          <p>Вывезем строительный мусор, старую мебель, бытовые отходы. Погрузим сами — вам останется только открыть дверь. Работаем быстро, оставляем чистоту после себя.</p>
+          <span class="svc-price">от 90 ₽/км</span>
+        </div>
+      </div>
+
+      <!-- 6. Перевозки по области -->
+      <div class="svc-card">
+        <img src="svc6_photo1.webp" alt="Перевозки по области" class="svc-photo">
+        <div class="svc-body">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+          <h3>Перевозки по области</h3>
+          <p>Работаем не только по Калининграду, но и по всей Калининградской области — Светлогорск, Зеленоградск, Балтийск, Советск, Черняховск, Гусев и другие города. До 250 км.</p>
+          <span class="svc-price">90 ₽/км</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="portfolio" id="portfolio">
+  <div class="container">
+    <div class="section-heading">
+      <div class="section-tag">Фотографии</div>
+      <h2 class="section-title">Наш транспорт и работы</h2>
+      <p class="section-desc">Реальные фото машины и выполненных заказов</p>
+    </div>
+    <div class="portfolio-grid">
+      <div class="portfolio-item">
+        <img src="svc1_photo1.webp" alt="Грузоперевозки Калининград">
+        <div class="portfolio-overlay"><h4>Квартирный переезд</h4><span>Калининград</span></div>
+      </div>
+      <div class="portfolio-item">
+        <img src="svc2_photo1.webp" alt="Грузчики Калининград">
+        <div class="portfolio-overlay"><h4>Доставка груза</h4><span>Калининград</span></div>
+      </div>
+      <div class="portfolio-item">
+        <img src="svc3_photo1.webp" alt="Доставка стройматериалов">
+        <div class="portfolio-overlay"><h4>Стройматериалы</h4><span>Калининград</span></div>
+      </div>
+      <div class="portfolio-item">
+        <img src="svc4_photo1.webp" alt="Грузчики">
+        <div class="portfolio-overlay"><h4>Погрузка мебели</h4><span>Калининград</span></div>
+      </div>
+      <div class="portfolio-item">
+        <img src="svc5_photo1.webp" alt="Вывоз мусора">
+        <div class="portfolio-overlay"><h4>Вывоз мусора</h4><span>Калининград</span></div>
+      </div>
+      <div class="portfolio-item">
+        <img src="svc6_photo1.webp" alt="Перевозки по области">
+        <div class="portfolio-overlay"><h4>Перевозки по области</h4><span>Калининградская область</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="container">
+    <div>
+      <div class="section-tag">Как мы работаем</div>
+      <h2 class="section-title" style="text-align:left">Просто и честно — без сюрпризов</h2>
+      <div class="process-steps">
+        <div class="p-step">
+          <div class="p-step-num">01</div>
+          <div><h4>Звонок или сообщение</h4><p>Напишите на Авито — уточним объём груза, адрес и удобное время. Цена обговаривается сразу и не меняется после выполнения заказа</p></div>
+        </div>
+        <div class="p-step">
+          <div class="p-step-num">02</div>
+          <div><h4>Подаём машину</h4><p>Время подачи от 20 минут по городу. FIAT Ducato вмещает полный комплект мебели однокомнатной квартиры за один рейс</p></div>
+        </div>
+        <div class="p-step">
+          <div class="p-step-num">03</div>
+          <div><h4>Грузим и везём</h4><p>Фиксируем мебель стяжными ремнями, хрупкое оборачиваем поролоном. Работаем аккуратно и быстро — берегём ваши вещи и время</p></div>
+        </div>
+        <div class="p-step">
+          <div class="p-step-num">04</div>
+          <div><h4>Разгружаем на месте</h4><p>Занесём на любой этаж, поставим в нужное место. Оплата по факту — только за реально отработанное время</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="process-image">
+      <img src="hero_bg.webp" alt="FIAT Ducato — грузоперевозки Калининград">
+    </div>
+  </div>
+</section>
+
+<!-- CALCULATOR / PRICING -->
+<section class="calculator" id="pricing">
+  <div class="container">
+    <h2>Стоимость услуг</h2>
+    <p>Цена обговаривается по телефону и не меняется после выполнения заказа</p>
+    <div class="calc-grid">
+      <div class="calc-card">
+        <h3>Перевозка грузов</h3>
+        <div class="price">90 ₽</div>
+        <div class="unit">за км пути</div>
+        <ul class="calc-features">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>FIAT Ducato, кузов 4×1.8×1.9 м</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Грузоподъёмность до 3 т</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Мин. вес груза: 5 кг</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>До 250 км от Калининграда</li>
+        </ul>
+      </div>
+      <div class="calc-card" style="border-color:#fbbf24;transform:translateY(-8px)">
+        <h3>Почасовая аренда</h3>
+        <div class="price">450 ₽</div>
+        <div class="unit">за час · мин. 2 часа</div>
+        <ul class="calc-features">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Квартирные переезды</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Офисные и дачные переезды</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Вывоз мусора и мебели</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Работаем юр.лицами и ИП</li>
+        </ul>
+      </div>
+      <div class="calc-card">
+        <h3>Грузчики</h3>
+        <div class="price">500 ₽</div>
+        <div class="unit">час / 1 человек · 3 чел.</div>
+        <ul class="calc-features">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>3 опытных грузчика</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Подъём на любой этаж</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Сборка/разборка мебели</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Наценки за срочность нет</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="container">
+    <div class="section-heading">
+      <div class="section-tag">Отзывы</div>
+      <h2 class="section-title">Что говорят клиенты</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="t-card">
+        <div class="t-stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+        <blockquote>«Перевозили двухкомнатную квартиру. Артём и его ребята загрузили всё за 40 минут, привезли без единой царапины. Цена не изменилась — как договорились, так и вышло!»</blockquote>
+        <div class="t-author"><div class="t-avatar">ИС</div><div><div class="t-name">Ирина Соколова</div><div class="t-role">Квартирный переезд, Калининград</div></div></div>
+      </div>
+      <div class="t-card">
+        <div class="t-stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+        <blockquote>«Заказывал доставку стройматериалов — блоки и мешки с цементом. Приехали быстро, помогли занести на склад. Рекомендую, работают профессионально.»</blockquote>
+        <div class="t-author"><div class="t-avatar">АМ</div><div><div class="t-name">Александр Михайлов</div><div class="t-role">Доставка стройматериалов</div></div></div>
+      </div>
+      <div class="t-card">
+        <div class="t-stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+        <blockquote>«Переезжали с дачи — много вещей, мебель, инструменты. Машина вместила всё за один рейс. Грузчики ребята отличные, работали без нытья. Цены приятно удивили!»</blockquote>
+        <div class="t-author"><div class="t-avatar">НК</div><div><div class="t-name">Наталья Кузнецова</div><div class="t-role">Дачный переезд, Зеленоградск</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="contact-form">
+      <h3>Оставить заявку</h3>
+      <p>Заполните форму — перезвоним и обговорим детали</p>
+      <form id="mainContactForm">
+        <div class="form-row">
+          <div class="form-group"><label>Ваше имя</label><input type="text" name="name" placeholder="Иван Иванов" required></div>
+          <div class="form-group"><label>Телефон</label><input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Тип услуги</label>
+            <select name="service">
+              <option value="">Выберите услугу</option>
+              <option>Квартирный переезд</option>
+              <option>Офисный переезд</option>
+              <option>Дачный переезд</option>
+              <option>Доставка стройматериалов</option>
+              <option>Вывоз мусора / мебели</option>
+              <option>Перевозка груза по области</option>
+              <option>Грузчики</option>
+              <option>Другое</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Удобное время</label><input type="text" name="time" placeholder="Например: завтра после 15:00"></div>
+        </div>
+        <div class="form-group"><label>Комментарий</label><textarea name="message" placeholder="Опишите задачу — что, откуда, куда..."></textarea></div>
+        <button type="submit" class="form-submit">Отправить заявку →</button>
+      </form>
+    </div>
+    <div class="contact-info">
+      <h3>Контакты</h3>
+      <p>Работаем по Калининграду и всей области. Пн–Вс, без выходных</p>
+      <div class="cd">
+        <div class="cd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div><h4>Адрес</h4><p>г. Калининград, Советский пр-т, 43<br>р-н Центральный · выезжает по всему городу</p></div>
+      </div>
+      <div class="cd">
+        <div class="cd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+        <div><h4>Время работы</h4><p>Понедельник — Воскресенье: 8:00 — 21:00<br>Наценки за срочность нет</p></div>
+      </div>
+      <div class="cd">
+        <div class="cd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <div>
+          <h4>Авито</h4>
+          <p><a href="https://www.avito.ru/kaliningrad/predlozheniya_uslug/gruzoperevozki_gruzchiki_kvartirnye_pereezdy_2449768645?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJpZ3hSbUJaZTJBN1o5VGR5Ijt9Q3fy6T8AAAA" target="_blank" style="color:var(--primary);font-weight:700">Написать на Авито →</a></p>
+        </div>
+      </div>
+      <div class="contact-schedule">
+        <h4>🚚 Параметры транспорта</h4>
+        <table>
+          <tr><td>Машина</td><td>FIAT Ducato (жёсткий кузов)</td></tr>
+          <tr><td>Кузов (Д×Ш×В)</td><td>4 × 1.80 × 1.90 м</td></tr>
+          <tr><td>Грузоподъёмность</td><td>до 3 т</td></tr>
+          <tr><td>Мест в кабине</td><td>2 пассажирских</td></tr>
+          <tr><td>Радиус доставки</td><td>до 250 км</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <img src="logo.webp" alt="Грузоперевозки Артём">
+          <span style="font-family:var(--font-accent);font-size:1.2rem;font-weight:900;color:#fff">ГРУЗО <span style="color:#4ade80">ПЕРЕВОЗКИ</span></span>
+        </div>
+        <p>Грузоперевозки и переезды в Калининграде. Своя машина — низкие цены. Работаем честно, без сюрпризов.</p>
+        <div class="footer-social">
+          <a href="https://www.avito.ru/kaliningrad/predlozheniya_uslug/gruzoperevozki_gruzchiki_kvartirnye_pereezdy_2449768645?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJpZ3hSbUJaZTJBN1o5VGR5Ijt9Q3fy6T8AAAA" target="_blank" aria-label="Авито"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.17 13.994l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.978.565z"/></svg></a>
+        </div>
+      </div>
+      <div><h4>Услуги</h4><ul>
+        <li><a href="#services">Квартирный переезд</a></li>
+        <li><a href="#services">Офисный переезд</a></li>
+        <li><a href="#services">Доставка стройматериалов</a></li>
+        <li><a href="#services">Грузчики</a></li>
+        <li><a href="#services">Вывоз мусора</a></li>
+        <li><a href="#services">Перевозки по области</a></li>
+      </ul></div>
+      <div><h4>Информация</h4><ul>
+        <li><a href="#portfolio">Фото работ</a></li>
+        <li><a href="#process">Как работаем</a></li>
+        <li><a href="#pricing">Цены</a></li>
+        <li><a href="#contact">Контакты</a></li>
+      </ul></div>
+      <div><h4>Контакты</h4><ul>
+        <li><a href="https://www.avito.ru/kaliningrad/predlozheniya_uslug/gruzoperevozki_gruzchiki_kvartirnye_pereezdy_2449768645?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJpZ3hSbUJaZTJBN1o5VGR5Ijt9Q3fy6T8AAAA" target="_blank">Мы на Авито</a></li>
+        <li><a href="#">г. Калининград</a></li>
+        <li><a href="#">Советский пр-т, 43</a></li>
+        <li><a href="#">Пн–Вс 8:00–21:00</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 Грузоперевозки Артём. Калининград.</span>
+      <span>Своя машина · Низкие цены · Без выходных.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- STICKY BUTTONS -->
+<div class="sticky-btns">
+  <a href="https://www.avito.ru/kaliningrad/predlozheniya_uslug/gruzoperevozki_gruzchiki_kvartirnye_pereezdy_2449768645?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJpZ3hSbUJaZTJBN1o5VGR5Ijt9Q3fy6T8AAAA" target="_blank" class="sticky-btn sticky-call">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    Написать на Авито
+  </a>
+  <button class="sticky-btn sticky-order" onclick="openModal()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+    Заявка
+  </button>
+</div>
+
+<!-- MODAL ЗАЯВКА -->
+<div class="modal-backdrop" id="modalBackdrop" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <h3>Оставить заявку</h3>
+    <p>Напишите — свяжемся и обговорим детали</p>
+    <form id="modalForm">
+      <div class="form-group"><label>Ваше имя</label><input type="text" name="name" placeholder="Иван Иванов" required></div>
+      <div class="form-group"><label>Телефон</label><input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required></div>
+      <div class="form-group"><label>Что нужно сделать?</label>
+        <select name="service">
+          <option value="">Выберите услугу</option>
+          <option>Квартирный переезд</option>
+          <option>Офисный переезд</option>
+          <option>Дачный переезд</option>
+          <option>Доставка стройматериалов</option>
+          <option>Вывоз мусора / мебели</option>
+          <option>Грузчики</option>
+          <option>Другое</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Комментарий (необязательно)</label><textarea name="message" placeholder="Откуда, куда, что везём..." style="height:90px"></textarea></div>
+      <button type="submit" class="form-submit">Отправить заявку</button>
+    </form>
+  </div>
+</div>
+
+<script>
+// ── Липкий nav ───────────────────────────────────────────
+window.addEventListener('scroll', () => {
+  document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// ── Модал ────────────────────────────────────────────────
+function openModal() {
+  document.getElementById('modalBackdrop').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('modalBackdrop').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// ── Отправка в Telegram ──────────────────────────────────
+const TG_TOKEN   = '8434584674:AAGvxeQulQDyaESBQeu7rF5siC6HHs2McrE';
+const TG_CHAT_ID = '549333404';
+
+async function sendToTelegram(formEl) {
+  const fd = new FormData(formEl);
+  const d  = Object.fromEntries(fd.entries());
+  const text = [
+    '🚚 Новая заявка — Грузоперевозки Артём (Калининград)',
+    '',
+    `👤 Имя: ${d.name || '—'}`,
+    `📱 Телефон: ${d.phone || '—'}`,
+    `🛻 Услуга: ${d.service || '—'}`,
+    `🕐 Время: ${d.time || '—'}`,
+    `💬 Комментарий: ${d.message || 'не указан'}`,
+    '',
+    '📌 Сайт: Грузоперевозки Артём'
+  ].join('\n');
+
+  const res = await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ chat_id: TG_CHAT_ID, text, parse_mode: 'HTML' })
+  });
+  return res.ok;
+}
+
+document.querySelectorAll('#mainContactForm, #modalForm').forEach(form => {
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const btn = form.querySelector('button[type=submit]');
+    const orig = btn.textContent;
+    btn.textContent = '⏳ Отправка...';
+    btn.disabled = true;
+    try {
+      const ok = await sendToTelegram(form);
+      if (ok) {
+        btn.textContent = '✅ Отправлено!';
+        form.reset();
+        setTimeout(() => { closeModal(); btn.textContent = orig; btn.disabled = false; }, 1800);
+      } else { throw new Error(); }
+    } catch {
+      btn.textContent = orig;
+      btn.disabled = false;
+      alert('Ошибка. Пожалуйста, напишите нам напрямую на Авито.');
+    }
+  });
+});
+</script>
+</body>
+</html>
